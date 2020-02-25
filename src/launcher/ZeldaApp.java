@@ -1,7 +1,14 @@
 package launcher;
  
+import java.io.File;
+
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -9,7 +16,7 @@ import javafx.stage.Stage;
  
 public class ZeldaApp extends Application {
     
-	
+	/*
     @Override
     public void start(Stage primaryStage) {
         
@@ -24,9 +31,9 @@ public class ZeldaApp extends Application {
         primaryStage.setTitle("Zelda");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
+    }*/
     
-	/*
+	
 	public void start(Stage theStage) 
 	{
 	    theStage.setTitle( "Timeline Example" );
@@ -40,9 +47,9 @@ public class ZeldaApp extends Application {
 	 
 	    GraphicsContext gc = canvas.getGraphicsContext2D();
 	 
-	    Image earth = new Image( new File("earth.png").toURI().toString() );
-	    Image sun   = new Image( new File("sun.png" ).toURI().toString() );
-	    Image space = new Image( new File("space.png" ).toURI().toString() );
+	    Image earth = new Image("file::src/lancher/earth.png");
+	    Image sun   = new Image("file::src/lancher/sun.png" );
+	    Image space = new Image("file::src/lancher/space.png" );
 	 
 	    final long startNanoTime = System.nanoTime();
 	 
@@ -63,7 +70,7 @@ public class ZeldaApp extends Application {
 	    }.start();
 	 
 	    theStage.show();
-	}*/
+	}
 	
     public static void main(String[] args) {
         launch(args);

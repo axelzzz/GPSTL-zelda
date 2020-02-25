@@ -11,23 +11,23 @@ import interfaces.agent.IPlayer;
 import interfaces.env.IMap;
 import utils.Parameters;
 
-public class Engine implements IEngine {
+public class GameEngine implements IEngine {
 	
-	private static Engine engine = null;
+	private static GameEngine engine = null;
 	
 	private List<IEntity> entities;	
 	private IMap map;
 	private IPlayer player;
 	
-	private Engine() {		
+	private GameEngine() {		
 		entities = new ArrayList<>();		
 		map = new MapImpl(Parameters.HEIGHT, Parameters.WIDTH, 1);
 		player = new Player(map.getHeight()/2, map.getWidth()/2);
 	}
 	
-	public static Engine getInstance() {
+	public static GameEngine getInstance() {
 		if(engine == null)
-			engine = new Engine();
+			engine = new GameEngine();
 		
 		return engine;
 	}
