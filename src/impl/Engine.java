@@ -9,6 +9,7 @@ import interfaces.IEngine;
 import interfaces.agent.IEntity;
 import interfaces.agent.IPlayer;
 import interfaces.env.IMap;
+import utils.Parameters;
 
 public class Engine implements IEngine {
 	
@@ -20,7 +21,7 @@ public class Engine implements IEngine {
 	
 	private Engine() {		
 		entities = new ArrayList<>();		
-		map = new MapImpl(300, 200, 1);
+		map = new MapImpl(Parameters.HEIGHT, Parameters.WIDTH, 1);
 		player = new Player(map.getHeight()/2, map.getWidth()/2);
 	}
 	
