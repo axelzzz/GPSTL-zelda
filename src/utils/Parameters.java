@@ -1,7 +1,9 @@
 package utils;
 
 public class Parameters {
+	
+	public Parameters() {}
 
-	public static final int HEIGHT = 500;
-	public static final int WIDTH = 400;
+	public static final double HEIGHT = 720;
+	public static final double WIDTH = 1280;
 }

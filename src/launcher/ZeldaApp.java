@@ -1,81 +1,40 @@
 package launcher;
  
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.File;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
  
 public class ZeldaApp extends Application {
     
-	/*
-    @Override
-    public void start(Stage primaryStage) {
-        
-    	Rectangle view = new Rectangle((double)utils.Parameters.HEIGHT, (double)utils.Parameters.WIDTH, Color.BEIGE);
-    	//Circle player = new Circl
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(view);
-
-        Scene scene = new Scene(root, 1024, 720);
-
-        primaryStage.setTitle("Zelda");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }*/
-    
+	private GameMenu gameMenu;
 	
-	public void start(Stage theStage) 
-	{
-		try {
-		    theStage.setTitle( "Timeline Example" );
-		 
-		    Group root = new Group();
-		    Scene theScene = new Scene( root );
-		    theStage.setScene( theScene );
-		 
-		    Canvas canvas = new Canvas( 512, 512 );
-		    root.getChildren().add( canvas );
-	
-		    GraphicsContext gc = canvas.getGraphicsContext2D();
-		 
-		    Image earth = new Image(new FileInputStream("resources/earth.png") );
-		    Image sun = new Image(new FileInputStream("resources/sun.png" ) );
-		    Image space = new Image(new FileInputStream("resources/space.png") );
+	@Override
+	public void start(Stage primaryStage) {
 		
-	    
-	   
-		    final long startNanoTime = System.nanoTime();
-	 
-	    
-		    new AnimationTimer()
-		    {
-		        public void handle(long currentNanoTime)
-		        {
-		            double t = (currentNanoTime - startNanoTime) / 100000000.0; 
-		 
-		            double x = 232 + 128 * Math.cos(t);
-		            double y = 232 + 128 * Math.sin(t);
-		 
-		            // background image clears canvas
-		            gc.drawImage( space, 0, 0 );
-		            gc.drawImage( earth, x, y );
-		            gc.drawImage( sun, 196, 196 );
-		        }
-		    }.start();
-		    theStage.show();
-		} catch (FileNotFoundException e) {
-					
-					e.printStackTrace();
-		}
+		primaryStage.setTitle("Zelda");
+		
+		Group root = new Group();
+		Scene scene = new Scene(root, utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
+		
+		ImageView imv = new ImageView(new File("resources/vonguru_images_jeux_video_zelda_botw_cover.jpg").toURI().toString());
+		imv.setFitHeight(utils.Parameters.HEIGHT);
+		imv.setFitWidth(utils.Parameters.WIDTH);
+		
+		gameMenu = new GameMenu(primaryStage, root);
+		
+		root.getChildren().add(imv);
+		root.getChildren().add(gameMenu);
+		
+		primaryStage.setScene(scene);
+        primaryStage.centerOnScreen();
+        primaryStage.show();
 	}
+	
+	
 	
     public static void main(String[] args) {
         launch(args);

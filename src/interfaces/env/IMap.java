@@ -2,8 +2,8 @@ package interfaces.env;
 
 public interface IMap {
 	
-	public int getHeight();
-	public int getWidth();
+	public double getHeight();
+	public double getWidth();
 	public int getDifficulty();
 
 }
