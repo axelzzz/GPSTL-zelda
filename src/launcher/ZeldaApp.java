@@ -1,6 +1,7 @@
 package launcher;
  
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -9,9 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
  
 public class ZeldaApp extends Application {
@@ -36,40 +34,47 @@ public class ZeldaApp extends Application {
 	
 	public void start(Stage theStage) 
 	{
-	    theStage.setTitle( "Timeline Example" );
+		try {
+		    theStage.setTitle( "Timeline Example" );
+		 
+		    Group root = new Group();
+		    Scene theScene = new Scene( root );
+		    theStage.setScene( theScene );
+		 
+		    Canvas canvas = new Canvas( 512, 512 );
+		    root.getChildren().add( canvas );
+	
+		    GraphicsContext gc = canvas.getGraphicsContext2D();
+		 
+		    Image earth = new Image(new FileInputStream("resources/earth.png") );
+		    Image sun = new Image(new FileInputStream("resources/sun.png" ) );
+		    Image space = new Image(new FileInputStream("resources/space.png") );
+		
+	    
+	   
+		    final long startNanoTime = System.nanoTime();
 	 
-	    Group root = new Group();
-	    Scene theScene = new Scene( root );
-	    theStage.setScene( theScene );
-	 
-	    Canvas canvas = new Canvas( 512, 512 );
-	    root.getChildren().add( canvas );
-	 
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	 
-	    Image earth = new Image("file::src/lancher/earth.png");
-	    Image sun   = new Image("file::src/lancher/sun.png" );
-	    Image space = new Image("file::src/lancher/space.png" );
-	 
-	    final long startNanoTime = System.nanoTime();
-	 
-	    new AnimationTimer()
-	    {
-	        public void handle(long currentNanoTime)
-	        {
-	            double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
-	 
-	            double x = 232 + 128 * Math.cos(t);
-	            double y = 232 + 128 * Math.sin(t);
-	 
-	            // background image clears canvas
-	            gc.drawImage( space, 0, 0 );
-	            gc.drawImage( earth, x, y );
-	            gc.drawImage( sun, 196, 196 );
-	        }
-	    }.start();
-	 
-	    theStage.show();
+	    
+		    new AnimationTimer()
+		    {
+		        public void handle(long currentNanoTime)
+		        {
+		            double t = (currentNanoTime - startNanoTime) / 100000000.0; 
+		 
+		            double x = 232 + 128 * Math.cos(t);
+		            double y = 232 + 128 * Math.sin(t);
+		 
+		            // background image clears canvas
+		            gc.drawImage( space, 0, 0 );
+		            gc.drawImage( earth, x, y );
+		            gc.drawImage( sun, 196, 196 );
+		        }
+		    }.start();
+		    theStage.show();
+		} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+		}
 	}
 	
     public static void main(String[] args) {
