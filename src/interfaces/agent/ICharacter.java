@@ -1,5 +1,5 @@
 package interfaces.agent;
 
-public interface ICharacter {
+public interface ICharacter extends IEntity {
 
 }

@@ -1,29 +1,19 @@
 package impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import impl.agent.Player;
-import impl.env.MapImpl;
+import impl.data.Data;
 import interfaces.IEngine;
-import interfaces.agent.IEntity;
-import interfaces.agent.IPlayer;
-import interfaces.env.IMap;
-import utils.Parameters;
+import utils.User;
+import utils.User.COMMAND;
 
 public class GameEngine implements IEngine {
 	
 	private static GameEngine engine = null;
-	
-	private List<IEntity> entities;	
-	private IMap map;
-	private IPlayer player;
-	
-	private GameEngine() {		
-		entities = new ArrayList<>();		
-		map = new MapImpl(Parameters.HEIGHT, Parameters.WIDTH, 1);
-		player = new Player(map.getHeight()/2, map.getWidth()/2);
-	}
+	private Data data;
+	private Timer engineClock;
+	private User.COMMAND command;
 	
 	public static GameEngine getInstance() {
 		if(engine == null)
@@ -31,5 +21,61 @@ public class GameEngine implements IEngine {
 		
 		return engine;
 	}
+	
+	public void init(Data data) {
+		engineClock = new Timer();
+		this.data = data;
+		command = COMMAND.NONE;
+	}
 
+	public void start(){
+		engineClock.schedule(new TimerTask(){
+			public void run() {
+				switch (command) {
+				case RIGHT:
+					moveRight();
+					break;
+				case LEFT:
+					moveLeft();
+					break;
+				case UP:
+					moveUp();
+					break;
+				case DOWN:
+					moveDown();
+					break;
+				default:
+				}
+				command = COMMAND.NONE;
+			}
+		},0,100);
+	}
+
+	public void stop(){
+		engineClock.cancel();
+	}
+
+	public void setPlayerCommand(User.COMMAND c){
+		command = c;
+	}
+
+	private void moveLeft(){
+		if (data.getPlayerPos().getX() > 0)
+			data.setPlayerPos(data.getPlayerPos().getX()-10, data.getPlayerPos().getY());
+	}
+
+	private void moveRight(){
+		if (data.getPlayerPos().getX() < data.getMapWidth());
+			data.setPlayerPos(data.getPlayerPos().getX()+10, data.getPlayerPos().getY());
+	}
+
+	private void moveUp(){
+		if (data.getPlayerPos().getY() > 0)
+			data.setPlayerPos(data.getPlayerPos().getX(), data.getPlayerPos().getY()-10);
+	}
+
+	private void moveDown(){
+		if (data.getPlayerPos().getY() < data.getMapHeight())
+			data.setPlayerPos(data.getPlayerPos().getX(), data.getPlayerPos().getY()+10);
+	}
 }

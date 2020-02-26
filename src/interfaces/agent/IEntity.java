@@ -1,10 +1,9 @@
 package interfaces.agent;
 
+import utils.Position;
+
 public interface IEntity {
 	
-	public double getX();
-	public double getY();
-	public void setX(double x);
-	public void setY(double y);
+	public Position getPos();
 
 }

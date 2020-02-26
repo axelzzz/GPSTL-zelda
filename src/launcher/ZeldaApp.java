@@ -1,79 +1,78 @@
 package launcher;
  
-import java.io.File;
-
+import impl.GameEngine;
+import impl.data.Data;
+import impl.view.Viewer;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import utils.User;
  
 public class ZeldaApp extends Application {
     
-	/*
-    @Override
-    public void start(Stage primaryStage) {
-        
-    	Rectangle view = new Rectangle((double)utils.Parameters.HEIGHT, (double)utils.Parameters.WIDTH, Color.BEIGE);
-    	//Circle player = new Circl
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(view);
+	private static GameEngine gameEngine;
+	private static Data data;
+	private static Viewer viewer;
+	private static AnimationTimer timer;
 
-        Scene scene = new Scene(root, 1024, 720);
-
-        primaryStage.setTitle("Zelda");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }*/
-    
-	
-	public void start(Stage theStage) 
-	{
-	    theStage.setTitle( "Timeline Example" );
-	 
-	    Group root = new Group();
-	    Scene theScene = new Scene( root );
-	    theStage.setScene( theScene );
-	 
-	    Canvas canvas = new Canvas( 512, 512 );
-	    root.getChildren().add( canvas );
-	 
-	    GraphicsContext gc = canvas.getGraphicsContext2D();
-	 
-	    Image earth = new Image("file::src/lancher/earth.png");
-	    Image sun   = new Image("file::src/lancher/sun.png" );
-	    Image space = new Image("file::src/lancher/space.png" );
-	 
-	    final long startNanoTime = System.nanoTime();
-	 
-	    new AnimationTimer()
-	    {
-	        public void handle(long currentNanoTime)
-	        {
-	            double t = (currentNanoTime - startNanoTime) / 1000000000.0; 
-	 
-	            double x = 232 + 128 * Math.cos(t);
-	            double y = 232 + 128 * Math.sin(t);
-	 
-	            // background image clears canvas
-	            gc.drawImage( space, 0, 0 );
-	            gc.drawImage( earth, x, y );
-	            gc.drawImage( sun, 196, 196 );
-	        }
-	    }.start();
-	 
-	    theStage.show();
-	}
 	
     public static void main(String[] args) {
+    	gameEngine = GameEngine.getInstance();
+    	data = new Data();
+    	gameEngine.init(data);
+        viewer = new Viewer(data);
         launch(args);
     }
+	
+    @Override
+    public void start(Stage primaryStage) {
+
+        Scene scene = new Scene(((Viewer)viewer).getPanel());;
+        primaryStage.setTitle("Zelda");
+        primaryStage.setScene(scene);
+        primaryStage.setWidth(utils.Parameters.visibilityWidth);
+        primaryStage.setHeight(utils.Parameters.visibilityHeight);
+        
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+        	@Override
+        	public void handle(KeyEvent event) {
+        		if (event.getCode()==KeyCode.LEFT) gameEngine.setPlayerCommand(User.COMMAND.LEFT);
+        		if (event.getCode()==KeyCode.RIGHT) gameEngine.setPlayerCommand(User.COMMAND.RIGHT);
+        		if (event.getCode()==KeyCode.UP) gameEngine.setPlayerCommand(User.COMMAND.UP);
+        		if (event.getCode()==KeyCode.DOWN) gameEngine.setPlayerCommand(User.COMMAND.DOWN);
+        		event.consume();
+        	}
+        });
+        primaryStage.setOnShown(new EventHandler<WindowEvent>() {
+        	@Override
+        	public void handle(WindowEvent event) {
+        		gameEngine.start();
+        	}
+        });
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+        	@Override
+        	public void handle(WindowEvent event) {
+        		gameEngine.stop();
+        	}
+        });
+
+        primaryStage.show();
+
+        timer = new AnimationTimer() {
+        	@Override
+        	public void handle(long l) {
+        		scene.setRoot(((Viewer)viewer).getPanel());
+        	}
+        };
+          timer.start();
+        
+    }
+    
+
     
 }

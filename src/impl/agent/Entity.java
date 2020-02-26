@@ -1,17 +1,19 @@
 package impl.agent;
 
 import interfaces.agent.IEntity;
+import utils.Position;
 
 public class Entity implements IEntity {
 
-	private double x, y;
+	private Position pos;
 	
 	public Entity(double x, double y) {
-		this.x = x;this.y = y;
+		this.pos = new Position(x, y);
 	}
 	
-	public double getX() { return x; }
-	public double getY() { return y; }
-	public void setX(double x) { this.x = x; }
-	public void setY(double y) { this.y = y; }
+	public Position getPos() {return pos;}
+	public void setPos(double x, double y) { 
+		pos.setX(x);
+		pos.setY(y);
+	}
 }
