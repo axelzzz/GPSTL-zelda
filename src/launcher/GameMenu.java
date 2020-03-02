@@ -11,6 +11,8 @@ import javafx.util.Duration;
 
 public class GameMenu extends Parent{	
 	
+	private Rectangle bg;
+	
 	public GameMenu(Stage s, Group root) {			
 		
 		VBox menu0 = new VBox(10);
@@ -30,7 +32,6 @@ public class GameMenu extends Parent{
 		
 		menu1.setTranslateX(offset);
 		menu2.setTranslateX(offset);		
-		
 		
 		MenuButton btnStart = new MenuButton("NEW GAME");
 		btnStart.setOnMouseClicked(event -> {
@@ -113,19 +114,19 @@ public class GameMenu extends Parent{
 			});
 		});
 		
-		MenuButton btnMap1 = new MenuButton("LOAD MAP1 (EASY)");
+		MenuButton btnMap1 = new MenuButton("EASY");
 		
 		btnMap1.setOnMouseClicked(event -> {
 			
 		});
 		
-		MenuButton btnMap2 = new MenuButton("LOAD MAP2 (MEDIUM)");
+		MenuButton btnMap2 = new MenuButton("MEDIUM");
 		
 		btnMap2.setOnMouseClicked(event -> {
 			
 		});
 
-		MenuButton btnMap3 = new MenuButton("LOAD MAP3 (UNAVAILABLE)");
+		MenuButton btnMap3 = new MenuButton("HARDCORE");
 		
 		
 		
@@ -136,13 +137,21 @@ public class GameMenu extends Parent{
 		menu1.getChildren().addAll(btnMap1, btnMap2, btnMap3, btnBack1);
 		menu2.getChildren().addAll(btnBack2); //, btnSound, btnVideo);
 		
-		Rectangle bg = new Rectangle(utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
+		bg = new Rectangle(utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
 		bg.setFill(Color.GREY);
 		bg.setOpacity(0.4);
 		
 		getChildren().addAll(bg, menu0);
 	}
 	
+	
+	public void setHeight(double h) {
+		bg.setHeight(h);
+	}
+	
+	public void setWidth(double w) {
+		bg.setWidth(w);
+	}
 	
 	
 	

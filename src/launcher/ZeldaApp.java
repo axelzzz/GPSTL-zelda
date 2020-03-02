@@ -18,19 +18,19 @@ public class ZeldaApp extends Application {
 		primaryStage.setTitle("Zelda");
 		
 		Group root = new Group();
-		Scene scene = new Scene(root, utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
+		Scene scene = new Scene( root, utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
 		
 		ImageView imv = new ImageView(new File("resources/vonguru_images_jeux_video_zelda_botw_cover.jpg").toURI().toString());
 		imv.setFitHeight(utils.Parameters.HEIGHT);
 		imv.setFitWidth(utils.Parameters.WIDTH);
 		
-		gameMenu = new GameMenu(primaryStage, root);
+		gameMenu = new GameMenu(primaryStage, root);		
 		
 		root.getChildren().add(imv);
 		root.getChildren().add(gameMenu);
 		
 		primaryStage.setScene(scene);
-        primaryStage.centerOnScreen();
+        
         primaryStage.show();
 	}
 	
