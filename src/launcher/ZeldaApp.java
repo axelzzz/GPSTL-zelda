@@ -25,6 +25,7 @@ public class ZeldaApp extends Application {
 	private static Viewer viewer;
 	private static AnimationTimer timer;
 	private GameMenu gameMenu;
+ 
 
 	
     public static void main(String[] args) {
@@ -41,16 +42,46 @@ public class ZeldaApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
+		Scene playScene = new Scene(((Viewer)viewer).getPanel());;
+		  primaryStage.setTitle("Zelda"); primaryStage.setScene(playScene);
+		  primaryStage.setWidth(utils.Parameters.WIDTHMENU);
+		  primaryStage.setHeight(utils.Parameters.HEIGHTMENU);
+		  
+		  playScene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+		  
+		  @Override public void handle(KeyEvent event) { if
+		  (event.getCode()==KeyCode.LEFT)
+		  gameEngine.setPlayerCommand(User.COMMAND.LEFT); if
+		  (event.getCode()==KeyCode.RIGHT)
+		  gameEngine.setPlayerCommand(User.COMMAND.RIGHT); if
+		  (event.getCode()==KeyCode.UP) gameEngine.setPlayerCommand(User.COMMAND.UP);
+		  if (event.getCode()==KeyCode.DOWN)
+		  gameEngine.setPlayerCommand(User.COMMAND.DOWN); event.consume(); } });
+		  primaryStage.setOnShown(new EventHandler<WindowEvent>() {
+		  
+		  @Override public void handle(WindowEvent event) { gameEngine.start(); } });
+		  primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		  
+		  @Override public void handle(WindowEvent event) { gameEngine.stop(); } });
+		  
+		  //primaryStage.show();
+		  
+		 AnimationTimer timer = new AnimationTimer() {
+		  @Override public void handle(long l) {
+		  playScene.setRoot(((Viewer)viewer).getPanel()); }
+		  };
+		  //timer.start();
+		
 		primaryStage.setTitle("Zelda");
 		
 		Group root = new Group();
-		Scene scene = new Scene( root, utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
+		Scene scene = new Scene( root, utils.Parameters.WIDTHMENU, utils.Parameters.HEIGHTMENU);
 		
 		ImageView imv = new ImageView(new File("resources/vonguru_images_jeux_video_zelda_botw_cover.jpg").toURI().toString());
 		imv.setFitHeight(utils.Parameters.HEIGHTMENU);
 		imv.setFitWidth(utils.Parameters.WIDTHMENU);
 		
-		gameMenu = new GameMenu(primaryStage, root);		
+		gameMenu = new GameMenu(primaryStage, root, playScene, timer);		
 		
 		root.getChildren().add(imv);
 		root.getChildren().add(gameMenu);
@@ -60,38 +91,11 @@ public class ZeldaApp extends Application {
         primaryStage.show();
 	}
 	
-	/*
-	 * @Override public void start(Stage primaryStage) {
-	 * 
-	 * Scene scene = new Scene(((Viewer)viewer).getPanel());;
-	 * primaryStage.setTitle("Zelda"); primaryStage.setScene(scene);
-	 * primaryStage.setWidth(utils.Parameters.visibilityWidth);
-	 * primaryStage.setHeight(utils.Parameters.visibilityHeight);
-	 * 
-	 * scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
-	 * 
-	 * @Override public void handle(KeyEvent event) { if
-	 * (event.getCode()==KeyCode.LEFT)
-	 * gameEngine.setPlayerCommand(User.COMMAND.LEFT); if
-	 * (event.getCode()==KeyCode.RIGHT)
-	 * gameEngine.setPlayerCommand(User.COMMAND.RIGHT); if
-	 * (event.getCode()==KeyCode.UP) gameEngine.setPlayerCommand(User.COMMAND.UP);
-	 * if (event.getCode()==KeyCode.DOWN)
-	 * gameEngine.setPlayerCommand(User.COMMAND.DOWN); event.consume(); } });
-	 * primaryStage.setOnShown(new EventHandler<WindowEvent>() {
-	 * 
-	 * @Override public void handle(WindowEvent event) { gameEngine.start(); } });
-	 * primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-	 * 
-	 * @Override public void handle(WindowEvent event) { gameEngine.stop(); } });
-	 * 
-	 * primaryStage.show();
-	 * 
-	 * timer = new AnimationTimer() {
-	 * 
-	 * @Override public void handle(long l) {
-	 * scene.setRoot(((Viewer)viewer).getPanel()); } }; timer.start();
-	 */
+	
+	
+	  
+	  
+	 
         
 	
 	

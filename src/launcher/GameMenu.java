@@ -1,19 +1,28 @@
 package launcher;
 
+import impl.GameEngine;
+import impl.view.Viewer;
+import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
+import utils.User;
 
 public class GameMenu extends Parent{	
 	
 	private Rectangle bg;
 	
-	public GameMenu(Stage s, Group root) {			
+	public GameMenu(Stage s, Group root, Scene playScene, AnimationTimer timer) {			
 		
 		VBox menu0 = new VBox(10);
 		VBox menu1 = new VBox(10);
@@ -117,7 +126,10 @@ public class GameMenu extends Parent{
 		MenuButton btnMap1 = new MenuButton("EASY");
 		
 		btnMap1.setOnMouseClicked(event -> {
-			
+			s.setWidth(utils.Parameters.visibilityWidth);
+			s.setHeight(utils.Parameters.visibilityHeight);
+			s.setScene(playScene);
+			timer.start();
 		});
 		
 		MenuButton btnMap2 = new MenuButton("MEDIUM");
@@ -137,7 +149,7 @@ public class GameMenu extends Parent{
 		menu1.getChildren().addAll(btnMap1, btnMap2, btnMap3, btnBack1);
 		menu2.getChildren().addAll(btnBack2); //, btnSound, btnVideo);
 		
-		bg = new Rectangle(utils.Parameters.WIDTH, utils.Parameters.HEIGHT);
+		bg = new Rectangle(utils.Parameters.WIDTHMENU, utils.Parameters.HEIGHTMENU);
 		bg.setFill(Color.GREY);
 		bg.setOpacity(0.4);
 		
