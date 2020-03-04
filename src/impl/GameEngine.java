@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import impl.data.Data;
 import interfaces.IEngine;
+import utils.Direction;
 import utils.User;
 import utils.User.COMMAND;
 
@@ -57,6 +58,10 @@ public class GameEngine implements IEngine {
 
 	public void setPlayerCommand(User.COMMAND c){
 		command = c;
+	}
+	
+	public void setPlayerDirection(Direction direction) {
+		data.setPlayerDirection(direction);
 	}
 
 	private void moveLeft(){

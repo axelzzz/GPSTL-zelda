@@ -13,10 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import utils.Parameters;
+import utils.Direction;
 
 public class Viewer {
 	
 	String MAP_PATH = "ressources/map";
+	String SPRITES_PATH = "resources/sprites";
 	Data data;
 	
 	public Viewer(Data data) {
@@ -40,13 +42,44 @@ public class Viewer {
         );
         double playerViewX = data.getPlayerPos().getX();
         double playerViewY = data.getPlayerPos().getY();
-    	Circle player = new Circle(data.getPlayerPos().getX()-xSource,data.getPlayerPos().getY()-ySource,20);
-    	player.setFill(Color.RED);
+//    	Circle player = new Circle(data.getPlayerPos().getX()-xSource,data.getPlayerPos().getY()-ySource,20);
+//    	player.setFill(Color.RED);
+        
+        
+        canvas.getGraphicsContext2D().drawImage(
+        		getPlayerSprite(data), data.getPlayerPos().getX()-xSource, data.getPlayerPos().getY()-ySource
+        );
 //        StackPane root = new StackPane();
 //        root.getChildren().add(view);
 //        root.getChildren().add(player);
     	Group panel = new Group();
-	    panel.getChildren().addAll(canvas,player);
+	    panel.getChildren().addAll(canvas);
 	    return panel;    
+	}
+	
+	
+	public Image getPlayerSprite(Data data) {
+		
+		String path = SPRITES_PATH+"/link";
+		
+		switch(data.getPlayer().getDirection()) {
+		
+			case EAST :
+				path+="E1";
+				break;
+			case SOUTH :
+				path+="S1";
+				break;
+			case WEST :
+				path+="W1";
+				break;
+			case NORTH :
+				path+="N1";
+				break;
+		
+		}
+		path+=".png";
+		
+		return new Image(new File(path).toURI().toString());
 	}
 }

@@ -8,6 +8,7 @@ import impl.env.MapBuilder;
 import interfaces.agent.IEntity;
 import interfaces.agent.IPlayer;
 import interfaces.env.IPlayMap;
+import utils.Direction;
 import utils.ECellType;
 import utils.Parameters;
 import utils.Position;
@@ -21,7 +22,7 @@ public class Data {
 	public Data() {
 		entities = new ArrayList<>();
 		map = MapBuilder.buildMapLevel(level);
-		player = new Player(Parameters.WIDTH/2, Parameters.HEIGHT/2);
+		player = new Player(Parameters.WIDTH/2, Parameters.HEIGHT/2, Direction.SOUTH);
 	}
 
 	public void setPlayerPos(double x, double y) {
@@ -44,5 +45,12 @@ public class Data {
 	}
 	public int getLevel() {
 		return level;
+	}
+	public IPlayer getPlayer() {
+		return player;
+	}
+	
+	public void setPlayerDirection(Direction direction) {
+		player.setDirection(direction);
 	}
 }

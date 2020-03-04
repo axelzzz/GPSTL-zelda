@@ -20,6 +20,7 @@ import javafx.scene.transform.Scale;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import utils.Direction;
 import utils.User;
 
 public class ZeldaApp extends Application {
@@ -42,7 +43,7 @@ public class ZeldaApp extends Application {
 	public void start(Stage primaryStage) {
 
 		Scene playScene = new Scene(((Viewer) viewer).getPanel());
-		;
+		
 		primaryStage.setTitle("Zelda");
 		primaryStage.setScene(playScene);
 		primaryStage.setWidth(utils.Parameters.WIDTHMENU);
@@ -52,14 +53,22 @@ public class ZeldaApp extends Application {
 
 			@Override
 			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.LEFT)
+				if (event.getCode() == KeyCode.LEFT) {
 					gameEngine.setPlayerCommand(User.COMMAND.LEFT);
-				if (event.getCode() == KeyCode.RIGHT)
+					gameEngine.setPlayerDirection(Direction.WEST);
+				}
+				if (event.getCode() == KeyCode.RIGHT) {
 					gameEngine.setPlayerCommand(User.COMMAND.RIGHT);
-				if (event.getCode() == KeyCode.UP)
+					gameEngine.setPlayerDirection(Direction.EAST);
+				}
+				if (event.getCode() == KeyCode.UP) {
 					gameEngine.setPlayerCommand(User.COMMAND.UP);
-				if (event.getCode() == KeyCode.DOWN)
+					gameEngine.setPlayerDirection(Direction.NORTH);
+				}
+				if (event.getCode() == KeyCode.DOWN) {
 					gameEngine.setPlayerCommand(User.COMMAND.DOWN);
+					gameEngine.setPlayerDirection(Direction.SOUTH);
+				}
 				event.consume();
 			}
 		});
@@ -107,7 +116,7 @@ public class ZeldaApp extends Application {
 
 		primaryStage.show();
 
-		// responsabilite
+		// responsiveness
 		SceneSizeChangeListener sizeListener = new SceneSizeChangeListener(scene);
 		scene.widthProperty().addListener(sizeListener);
 		scene.heightProperty().addListener(sizeListener);
