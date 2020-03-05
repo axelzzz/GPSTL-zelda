@@ -65,16 +65,16 @@ public class Viewer {
 		switch(data.getPlayer().getDirection()) {
 		
 			case EAST :
-				path+="E1";
+				if(data.getPlayer().step()) path+="E1"; else path+="E2"; 				
 				break;
 			case SOUTH :
-				path+="S1";
+				if(data.getPlayer().step()) path+="S1"; else path+="S2"; 
 				break;
 			case WEST :
-				path+="W1";
+				if(data.getPlayer().step()) path+="W1"; else path+="W2"; 
 				break;
 			case NORTH :
-				path+="N1";
+				if(data.getPlayer().step()) path+="N1"; else path+="N2"; 
 				break;
 		
 		}

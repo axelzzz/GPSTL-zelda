@@ -53,4 +53,8 @@ public class Data {
 	public void setPlayerDirection(Direction direction) {
 		player.setDirection(direction);
 	}
+	
+	public boolean step() { return player.step(); }
+	
+	public void switchStep() { player.switchStep(); }
 }

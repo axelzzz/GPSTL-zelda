@@ -31,19 +31,23 @@ public class GameEngine implements IEngine {
 
 	public void start(){
 		engineClock.schedule(new TimerTask(){
-			public void run() {
+			public void run() {								
 				switch (command) {
 				case RIGHT:
 					moveRight();
+					data.switchStep();
 					break;
 				case LEFT:
 					moveLeft();
+					data.switchStep();
 					break;
 				case UP:
 					moveUp();
+					data.switchStep();
 					break;
 				case DOWN:
 					moveDown();
+					data.switchStep();
 					break;
 				default:
 				}
