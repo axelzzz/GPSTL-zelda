@@ -40,18 +40,14 @@ public class Viewer {
         canvas.getGraphicsContext2D().drawImage(
               backgroungImage, xSource, ySource, Parameters.visibilityWidth, Parameters.visibilityWidth, 0, 0, Parameters.visibilityWidth, Parameters.visibilityWidth
         );
-        double playerViewX = data.getPlayerPos().getX();
-        double playerViewY = data.getPlayerPos().getY();
-//    	Circle player = new Circle(data.getPlayerPos().getX()-xSource,data.getPlayerPos().getY()-ySource,20);
-//    	player.setFill(Color.RED);
         
+        Image playerImage = getPlayerSprite(data);
         
-        canvas.getGraphicsContext2D().drawImage(
-        		getPlayerSprite(data), data.getPlayerPos().getX()-xSource, data.getPlayerPos().getY()-ySource
+        canvas.getGraphicsContext2D().drawImage(playerImage, 
+        		data.getPlayerPos().getX()-xSource-(playerImage.getWidth()/2), 
+        		data.getPlayerPos().getY()-ySource-(playerImage.getHeight()/2)
         );
-//        StackPane root = new StackPane();
-//        root.getChildren().add(view);
-//        root.getChildren().add(player);
+
     	Group panel = new Group();
 	    panel.getChildren().addAll(canvas);
 	    return panel;    

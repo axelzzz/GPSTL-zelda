@@ -8,8 +8,5 @@ public interface IPlayer extends ICharacter {
 
 	public IWeapon getWeapon();
 	public IStat getStat();
-	public Direction getDirection();
-	public void setDirection(Direction direction);
-	public boolean step();
-	public void switchStep();
+	
 }

@@ -127,7 +127,7 @@ public class GameMenu extends Parent{
 		
 		btnMap1.setOnMouseClicked(event -> {
 			s.setWidth(utils.Parameters.visibilityWidth);
-			s.setHeight(utils.Parameters.visibilityHeight);
+			s.setHeight(utils.Parameters.visibilityHeight+37);
 			s.setScene(playScene);
 			timer.start();
 		});

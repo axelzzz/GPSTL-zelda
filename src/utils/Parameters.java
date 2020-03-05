@@ -9,8 +9,8 @@ public class Parameters {
 	public static final int WIDTH = 512;
 	public static final int HEIGHT = 512;
 	public static int TILESIZE = 32;
-	public static int visibilityWidth = 5*TILESIZE;
-	public static int visibilityHeight = 5*TILESIZE;	
+	public static int visibilityWidth = 10*TILESIZE;
+	public static int visibilityHeight = 10*TILESIZE;	
 	public static String baseDirectory = "ressources";
 	public static HashMap<Integer, ECellType> mapCellType = new HashMap<Integer, ECellType>();
 	public static int[][] MAP1 = new int[][]{ //plutot construction en lecture après
