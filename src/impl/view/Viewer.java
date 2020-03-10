@@ -36,6 +36,12 @@ public class Viewer {
 		double playerY = data.getPlayerPos().getY();
 		double xSource = playerX-halfVisibX < 0 ? 0 : playerX-halfVisibX;
 		double ySource = playerY-halfVisibY < 0 ? 0 : playerY-halfVisibY;
+		if (playerX + halfVisibX >= Parameters.WIDTH) {
+			xSource = Parameters.WIDTH - Parameters.visibilityWidth;
+		}
+		if (playerY + halfVisibY >= Parameters.HEIGHT) {
+			ySource = Parameters.HEIGHT -Parameters.visibilityHeight;
+		}
 
         canvas.getGraphicsContext2D().drawImage(
               backgroungImage, xSource, ySource, Parameters.visibilityWidth, Parameters.visibilityWidth, 0, 0, Parameters.visibilityWidth, Parameters.visibilityWidth

@@ -5,12 +5,13 @@ import java.util.HashMap;
 public class Parameters {
 	
 	public Parameters() {}
-
-	public static final int WIDTH = 512;
-	public static final int HEIGHT = 512;
+	/*dimensions de la map*/
+	public static final int WIDTH = 1024;
+	public static final int HEIGHT = 1024;
 	public static int TILESIZE = 32;
-	public static int visibilityWidth = 10*TILESIZE;
-	public static int visibilityHeight = 10*TILESIZE;	
+	/*dimensions de la fenêtre de jeu*/
+	public static int visibilityWidth = 15*TILESIZE;
+	public static int visibilityHeight = 15*TILESIZE;	
 	public static String baseDirectory = "ressources";
 	public static HashMap<Integer, ECellType> mapCellType = new HashMap<Integer, ECellType>();
 	public static int[][] MAP1 = new int[][]{ //plutot construction en lecture après

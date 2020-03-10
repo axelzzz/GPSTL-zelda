@@ -69,22 +69,22 @@ public class GameEngine implements IEngine {
 	}
 
 	private void moveLeft(){
-		if (data.getPlayerPos().getX() > 0)
+		if (data.getPlayerPos().getX() > 0+10)
 			data.setPlayerPos(data.getPlayerPos().getX()-10, data.getPlayerPos().getY());
 	}
 
 	private void moveRight(){
-		if (data.getPlayerPos().getX() < data.getMapWidth());
+		if (data.getPlayerPos().getX() < data.getMapWidth()-10)
 			data.setPlayerPos(data.getPlayerPos().getX()+10, data.getPlayerPos().getY());
 	}
 
 	private void moveUp(){
-		if (data.getPlayerPos().getY() > 0)
+		if (data.getPlayerPos().getY() > 0+10)
 			data.setPlayerPos(data.getPlayerPos().getX(), data.getPlayerPos().getY()-10);
 	}
 
 	private void moveDown(){
-		if (data.getPlayerPos().getY() < data.getMapHeight())
+		if (data.getPlayerPos().getY() < data.getMapHeight()-10)
 			data.setPlayerPos(data.getPlayerPos().getX(), data.getPlayerPos().getY()+10);
 	}
 }
